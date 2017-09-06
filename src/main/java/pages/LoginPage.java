@@ -14,10 +14,12 @@ public class LoginPage {
     public static final By LOGIN_BUTTON_LOCATOR = By.cssSelector(".nb-button._nb-action-button.nb-group-start");
 
     public static LoginPage userClickOnLoginButton() {
+        LOGGER.info("Click on login button");
         AbstractPage.highlightElement(LOGIN_BUTTON_LOCATOR);
         getWebDriverInstance()
                 .findElement(LOGIN_BUTTON_LOCATOR)
                 .click();
+        LOGGER.info("User was logged in");
         return new LoginPage();
     }
     public static LoginPage userWasLogInSuccessfully() {

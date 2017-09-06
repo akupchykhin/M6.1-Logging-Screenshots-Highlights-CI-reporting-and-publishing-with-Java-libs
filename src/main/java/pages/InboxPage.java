@@ -18,6 +18,7 @@ public class InboxPage extends AbstractPage {
     }
 
     public static HomePage logoff() {
+        LOGGER.info("logoff");
         WebDriverSingleton.getWebDriverInstance().findElement(LOGOFF_SELECTOR_LOCATOR).click();
         WebDriverWait waitForLogoffButton = new WebDriverWait(WebDriverSingleton.getWebDriverInstance(), 2);
         waitForLogoffButton.until(ExpectedConditions.elementToBeClickable(LOGOFF_BUTTON_LOCATOR)).click();
@@ -25,6 +26,7 @@ public class InboxPage extends AbstractPage {
     }
 
     public static HomePage goToInboxPage() {
+        LOGGER.info("Go to Inbox page");
         getWebDriverInstance()
                 .get(INBOX_PAGE_URL);
         AbstractPage.waitForElementEnabled(ComposePage.COMPOSE_BUTTON_LOCATOR);

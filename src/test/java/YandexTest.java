@@ -1,3 +1,4 @@
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,6 +15,8 @@ import pages.utils.WebDriverSingleton;
 import static pages.utils.WebDriverSingleton.getWebDriverInstance;
 
 public class YandexTest {
+    private static final Logger LOGGER = Logger.getLogger(ComposePage.class.getSimpleName());
+
 
     @BeforeMethod(description = "Start browser")
      public void browserStart() {
@@ -35,24 +38,24 @@ public class YandexTest {
     public void newMailCreation() {
         Letter letter = new LetterFactory().defaultLetter();
         LetterService.newEmailCreation(letter);
+        ComposePage.saveEmailAsDraft();
         ScreenshotsMaker.makeScreenshot();
         WebElement emailWasCreated = getWebDriverInstance().findElement(ComposePage.AUTOSAVE_STATUS_LOCATOR);
         Assert.assertTrue(emailWasCreated.isDisplayed(), "Email was not created");
-    }
+}
 
     @Test(description = "Verify, that the mail presents in ‘Drafts’ folder")
-    public void emailInDraftVerify() {
+    public void emailInDraftVerify() throws Exception {
         Letter letter = new LetterFactory().defaultLetter();
         LetterService.newEmailCreation(letter);
         DraftsPage.draftUrl();
-//                .findAnEmailInDraftFolder();
         String emailInDraft = getWebDriverInstance().findElement(DraftsPage.BUBBLE_BLOCK_TEXT_LOCATOR).getText();
         Assert.assertEquals(emailInDraft, DraftsPage.RECEIVER, "Email not in Drafts folder");
         ScreenshotsMaker.makeScreenshot();
     }
 
     @Test(description = "Send the mail")
-    public void sendTheEmail() {
+    public void sendTheEmail() throws Exception {
         Letter letter = new LetterFactory().defaultLetter();
         LetterService.newEmailCreation(letter);
         ComposePage.sendTheEmail();
@@ -62,7 +65,7 @@ public class YandexTest {
     }
 
     @Test(description = "Verify, that the mail is in ‘Sent’ folder.")
-    public void emailIsInSent() {
+    public void emailIsInSent() throws Exception {
         Letter letter = new LetterFactory().defaultLetter();
         LetterService.newEmailCreation(letter);
         ComposePage.sendTheEmail();

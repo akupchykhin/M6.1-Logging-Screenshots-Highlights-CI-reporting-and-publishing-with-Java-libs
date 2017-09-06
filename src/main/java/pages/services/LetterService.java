@@ -1,5 +1,6 @@
 package pages.services;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.ComposePage;
@@ -9,7 +10,10 @@ import static pages.utils.WebDriverSingleton.getWebDriverInstance;
 
 public class LetterService {
 
+
+
     public static void newEmailCreation(Letter letter) {
+        LOGGER.info("try to create new email");
         waitForElementEnabled(ComposePage.COMPOSE_BUTTON_LOCATOR);
         highlightElement(ComposePage.COMPOSE_BUTTON_LOCATOR);
         getWebDriverInstance().findElement(ComposePage.COMPOSE_BUTTON_LOCATOR).click();
@@ -19,5 +23,7 @@ public class LetterService {
         waitForElementVisible(ComposePage.RESIZE_FIELD_ELEMENT_LOCATOR);
         WebElement resize = getWebDriverInstance().findElement(ComposePage.RESIZE_FIELD_ELEMENT_LOCATOR);
         new Actions(getWebDriverInstance()).clickAndHold(resize).moveByOffset(150, -1500).release().build().perform();
+        LOGGER.warn("Email was created");
+        }
     }
-}
+

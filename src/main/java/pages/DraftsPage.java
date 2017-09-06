@@ -18,6 +18,7 @@ public class DraftsPage extends AbstractPage {
     }
 
     public static DraftsPage draftUrl() {
+        LOGGER.info("Go to draft page");
         WebDriverSingleton.getWebDriverInstance().get(GO_TO_DRAFT_URL);
         return new DraftsPage(WebDriverSingleton.getWebDriverInstance());
     }

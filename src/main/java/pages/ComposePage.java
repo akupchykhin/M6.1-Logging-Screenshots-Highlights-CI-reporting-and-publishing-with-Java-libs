@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,8 @@ import pages.utils.WebDriverSingleton;
 import static pages.utils.WebDriverSingleton.getWebDriverInstance;
 
 public class ComposePage extends AbstractPage{
+
+    private Logger logger;
 
     public static final By TO_FIELD_LOCATOR = By.cssSelector(".js-compose-field.mail-Bubbles");
     public static final By SUBJECT_FIELD_LOCATOR = By.cssSelector(".mail-Compose-Field-Input-Controller.js-compose-field.js-editor-tabfocus-prev");
@@ -29,28 +32,33 @@ public class ComposePage extends AbstractPage{
     }
 
     public static ComposePage saveEmailAsDraft() {
+        LOGGER.info("Trying to save an email as draft");
         String saveButton = Keys.chord(Keys.CONTROL, "s");
         getWebDriverInstance().findElement(MESSAGE_BODY_FIELD_LOCATOR).sendKeys(saveButton);
         WebDriverWait waitForAutosaveStatusElement = new WebDriverWait(getWebDriverInstance(), 12);
         waitForAutosaveStatusElement.until(ExpectedConditions.visibilityOfElementLocated(AUTOSAVE_STATUS_LOCATOR));
         AbstractPage.waitForElementVisible(AUTOSAVE_STATUS_LOCATOR);
+        LOGGER.warn("Email was saved");
         return new ComposePage(getWebDriverInstance());
     }
 
     public static ComposePage sendTheEmail() {
+        LOGGER.info("Trying to send the email");
         waitForElementEnabled(ComposePage.DEFAULT_FIELD_FOR_SENDING_LOCATOR);
         WebElement sendSaveButtons = WebDriverSingleton.getWebDriverInstance().findElement(ComposePage.DEFAULT_FIELD_FOR_SENDING_LOCATOR);
         new Actions(WebDriverSingleton.getWebDriverInstance()).sendKeys(sendSaveButtons,Keys.CONTROL, Keys.ENTER).build().perform();
-        return new ComposePage(WebDriverSingleton.getWebDriverInstance());
+                return new ComposePage(WebDriverSingleton.getWebDriverInstance());
     }
 
     public static ComposePage messageWasSendedNotificationAppears() {
         WebDriverWait waitForSentNotificationElement = new WebDriverWait(WebDriverSingleton.getWebDriverInstance(), 5);
         waitForSentNotificationElement.until(ExpectedConditions.visibilityOfElementLocated(ComposePage.SENT_NOTIFICATION_LOCATOR));
+        LOGGER.warn("Email was sended");
         return new ComposePage(WebDriverSingleton.getWebDriverInstance());
     }
 
     public static ComposePage clickOnComposeButton() {
+        LOGGER.info("Clicking on compose button");
         AbstractPage.waitForElementEnabled(ComposePage.COMPOSE_BUTTON_LOCATOR);
         AbstractPage.highlightElement(ComposePage.COMPOSE_BUTTON_LOCATOR);
         getWebDriverInstance().findElement(COMPOSE_BUTTON_LOCATOR).click();

@@ -20,17 +20,21 @@ public class HomePage extends AbstractPage {
 
     public static HomePage userOnHomePageVerify() {
         waitForElementPresent(HOME_LOGO_LOCATOR);
+        LOGGER.warn("User on home page");
         return new HomePage(WebDriverSingleton.getWebDriverInstance());
     }
     public static HomePage clickLogOff() {
+        LOGGER.info("Click on logoff selector");
         WebDriverWait waitForLogoffButton = new WebDriverWait(getWebDriverInstance(), 5);
         waitForLogoffButton.until(ExpectedConditions.elementToBeClickable(LOGOFF_SELECTOR_LOCATOR)).click();
         return new HomePage(getWebDriverInstance());
     }
 
     public static HomePage exitConfirmation() {
+        LOGGER.info("confirm logoff");
         WebDriverWait waitForLogoffButton = new WebDriverWait(getWebDriverInstance(), 5);
         waitForLogoffButton.until(ExpectedConditions.elementToBeClickable(LOGOFF_BUTTON_LOCATOR)).click();
+        LOGGER.warn("User was logged out");
         return new HomePage(getWebDriverInstance());
     }
 

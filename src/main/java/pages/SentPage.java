@@ -20,14 +20,17 @@ public class SentPage extends AbstractPage {
     }
 
     public static SentPage goToSentPage() {
+        LOGGER.info("Go to sent page");
         getWebDriverInstance().get(SENT_PAGE_URL);
         WebElement sentFolderElement = getWebDriverInstance().findElement(SENT_FOLDER_ELEMENT_LOCATOR);
         return new SentPage(getWebDriverInstance());
     }
 
     public static SentPage verifyThatEmailIsInSentFolder() {
+        LOGGER.info("Is email in sent folder?");
         waitForElementEnabled(SENDED_ELEMENT_LOCATOR);
         WebElement emailIsInSent = WebDriverSingleton.getWebDriverInstance().findElement(SENDED_ELEMENT_LOCATOR);
+        LOGGER.info("Yes!");
         return new SentPage(getWebDriverInstance());
     }
 }

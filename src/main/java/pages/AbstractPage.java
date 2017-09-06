@@ -1,4 +1,5 @@
 package pages;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,8 @@ import pages.utils.WebDriverSingleton;
 
 public abstract class AbstractPage {
     public static final int WAIT_FOR_TIMEOUT_SECONDS = 10;
+    public static final Logger LOGGER = Logger.getLogger(ComposePage.class.getSimpleName());
+
 
     public AbstractPage(WebDriver webDriverInstance) {
     }
