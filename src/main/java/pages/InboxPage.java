@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.utils.WebDriverSingleton;
-
 import static pages.utils.WebDriverSingleton.getWebDriverInstance;
 
 public class InboxPage extends AbstractPage {
@@ -25,7 +24,7 @@ public class InboxPage extends AbstractPage {
         return new HomePage(WebDriverSingleton.getWebDriverInstance());
     }
 
-    public static HomePage goToInboxPage(){
+    public static HomePage goToInboxPage() {
         getWebDriverInstance()
                 .get(INBOX_PAGE_URL);
         AbstractPage.waitForElementEnabled(ComposePage.COMPOSE_BUTTON_LOCATOR);

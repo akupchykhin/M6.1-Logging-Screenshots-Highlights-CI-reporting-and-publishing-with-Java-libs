@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import pages.utils.WebDriverSingleton;
 
 import static pages.InboxPage.LOGOFF_BUTTON_LOCATOR;
@@ -37,7 +36,6 @@ public class HomePage extends AbstractPage {
 
     public static HomePage userLoggedOutSuccessfullyConfirmation() {
         WebElement userLoggedOut = getWebDriverInstance().findElement(HOME_LOGO_LOCATOR);
-//        Assert.assertTrue(userLoggedOut.isDisplayed(), "User can not log out");
         return new HomePage(getWebDriverInstance());
     }
 }

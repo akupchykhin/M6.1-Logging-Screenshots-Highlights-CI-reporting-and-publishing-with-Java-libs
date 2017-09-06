@@ -22,14 +22,12 @@ public class SentPage extends AbstractPage {
     public static SentPage goToSentPage() {
         getWebDriverInstance().get(SENT_PAGE_URL);
         WebElement sentFolderElement = getWebDriverInstance().findElement(SENT_FOLDER_ELEMENT_LOCATOR);
-        Assert.assertTrue(sentFolderElement.isDisplayed(), "Cannot reach sent folder");
         return new SentPage(getWebDriverInstance());
     }
 
     public static SentPage verifyThatEmailIsInSentFolder() {
         waitForElementEnabled(SENDED_ELEMENT_LOCATOR);
         WebElement emailIsInSent = WebDriverSingleton.getWebDriverInstance().findElement(SENDED_ELEMENT_LOCATOR);
-        Assert.assertTrue(emailIsInSent.isDisplayed(), "Email  not in sent folder");
         return new SentPage(getWebDriverInstance());
     }
 }

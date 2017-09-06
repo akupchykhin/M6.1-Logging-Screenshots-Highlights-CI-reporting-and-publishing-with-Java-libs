@@ -7,6 +7,14 @@
     <groupId>com.epam</groupId>
     <artifactId>demo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <aspectj.version>1.8.10</aspectj.version>
+    </properties>
+    <parent>
+        <groupId>ru.yandex.qatools.allure</groupId>
+        <artifactId>allure-examples-parent</artifactId>
+        <version>1.0</version>
+    </parent>
 
     <dependencies>
         <dependency>
@@ -23,19 +31,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.13</version>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
@@ -65,8 +60,48 @@
             <version>1.2.5</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.0-BETA17</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.0-BETA17</version>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.8</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

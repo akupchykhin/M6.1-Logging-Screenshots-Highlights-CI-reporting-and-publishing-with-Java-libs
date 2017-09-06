@@ -1,15 +1,5 @@
 package pages.business_objects;
 
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import pages.ComposePage;
-
-import static pages.AbstractPage.highlightElement;
-import static pages.AbstractPage.waitForElementEnabled;
-import static pages.AbstractPage.waitForElementVisible;
-import static pages.utils.WebDriverSingleton.getWebDriverInstance;
-
 public class LetterBuilder {
 
     private Letter letter = new Letter();

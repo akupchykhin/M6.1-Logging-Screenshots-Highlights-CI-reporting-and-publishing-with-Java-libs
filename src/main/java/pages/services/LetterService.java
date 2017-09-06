@@ -1,22 +1,13 @@
 package pages.services;
 
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import pages.AbstractPage;
 import pages.ComposePage;
 import pages.business_objects.Letter;
-
 import static pages.AbstractPage.*;
 import static pages.utils.WebDriverSingleton.getWebDriverInstance;
 
-
 public class LetterService {
-
-//    public LetterService(WebDriver webDriverInstance) {
-//        super(webDriverInstance);
-//    }
 
     public static void newEmailCreation(Letter letter) {
         waitForElementEnabled(ComposePage.COMPOSE_BUTTON_LOCATOR);

@@ -1,8 +1,7 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import pages.utils.WebDriverSingleton;
 
 import static pages.utils.WebDriverSingleton.getWebDriverInstance;
@@ -25,8 +24,6 @@ public class DraftsPage extends AbstractPage {
 
     public static DraftsPage findAnEmailInDraftFolder() {
         getWebDriverInstance().get(GO_TO_DRAFT_URL);
-//        WebElement emailIsInSent = getWebDriverInstance().findElement(EMAIL_IN_DRAFT_FOLDER_LOCATOR);
-//        Assert.assertTrue(emailIsInSent.isDisplayed(), "Email was not sent");
         return new DraftsPage(getWebDriverInstance());
     }
 }
